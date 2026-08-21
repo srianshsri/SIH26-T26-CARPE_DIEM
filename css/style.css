@@ -1,0 +1,458 @@
+/* ==========================================================================
+   CareGrid — Design tokens
+   White clinical base, layered blues, black/near-black headings.
+   The Risk Assessment stage (Stage 3) and the score dial (Stage 4/5) are
+   the deliberate spots of colour against an otherwise quiet system.
+   ========================================================================== */
+:root{
+  --white:#ffffff;
+  --bg-soft:#f6f9fd;
+  --bg-panel:#eef4fc;
+  --line:#e2e9f4;
+  --line-strong:#cddaf0;
+
+  --blue-900:#0b2b5c;
+  --blue-800:#123c7a;
+  --blue-700:#14459e;
+  --blue-600:#1c5cd1;
+  --blue-500:#2e6eea;
+  --blue-400:#5f8ff2;
+  --blue-100:#dce9fc;
+
+  --ink:#0d1117;
+  --ink-soft:#4b5768;
+  --ink-faint:#8492a6;
+
+  --risk-high:#d7392c;
+  --risk-high-bg:#fdecea;
+  --risk-mod:#c8790a;
+  --risk-mod-bg:#fef3df;
+  --risk-low:#1f8a52;
+  --risk-low-bg:#e6f7ee;
+
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:22px;
+  --shadow-sm:0 1px 2px rgba(11,43,92,.06), 0 1px 1px rgba(11,43,92,.04);
+  --shadow-md:0 8px 24px rgba(11,43,92,.10);
+  --shadow-lg:0 20px 48px rgba(11,43,92,.14);
+
+  --font-display:'Manrope', 'Segoe UI', sans-serif;
+  --font-body:'Inter', 'Segoe UI', sans-serif;
+  --font-mono:'IBM Plex Mono', ui-monospace, monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--ink);
+  background:var(--white);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  color:var(--ink);
+  margin:0 0 .3em;
+  letter-spacing:-0.01em;
+  font-weight:800;
+}
+p{margin:0 0 1em; color:var(--ink-soft)}
+a{color:inherit; text-decoration:none}
+button{font-family:inherit}
+:focus-visible{outline:2.5px solid var(--blue-500); outline-offset:2px}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important}
+}
+
+.mono{font-family:var(--font-mono)}
+.eyebrow{
+  font-family:var(--font-mono);
+  font-size:.72rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--blue-600);
+  font-weight:600;
+}
+
+/* ---------- shell / topbar ---------- */
+.topbar{
+  background:var(--white);
+  border-bottom:1px solid var(--line);
+  position:sticky; top:0; z-index:40;
+}
+.topbar-inner{
+  max-width:1280px; margin:0 auto;
+  display:flex; align-items:center; gap:28px;
+  padding:12px 28px;
+}
+.brand{display:flex; align-items:center; gap:10px; flex-shrink:0}
+.brand-mark{width:32px; height:32px; display:block}
+.brand-text{display:flex; flex-direction:column; line-height:1.15}
+.brand-name{font-family:var(--font-display); font-weight:800; font-size:1.02rem; color:var(--ink)}
+.brand-sub{font-family:var(--font-mono); font-size:.66rem; color:var(--ink-faint); letter-spacing:.04em}
+
+.stage-nav{display:flex; align-items:center; gap:4px; flex:1; overflow-x:auto}
+.nav-step{
+  font-size:.86rem; font-weight:600; color:var(--ink-faint);
+  padding:8px 13px; border-radius:999px; white-space:nowrap;
+  transition:background .15s, color .15s;
+}
+.nav-step:hover{color:var(--blue-700); background:var(--bg-panel)}
+.nav-step.is-active{color:var(--blue-700); background:var(--blue-100)}
+.nav-step.is-disabled{color:#c3cbd9; pointer-events:none}
+
+.topbar-right{flex-shrink:0}
+.session-chip{display:flex; align-items:center; gap:9px; background:var(--bg-panel); border:1px solid var(--line); padding:5px 8px 5px 6px; border-radius:999px}
+.avatar{
+  width:28px; height:28px; border-radius:50%; background:var(--blue-700); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:.68rem; font-weight:700; font-family:var(--font-display);
+  flex-shrink:0;
+}
+.session-info{display:flex; flex-direction:column; line-height:1.15}
+.session-name{font-size:.8rem; font-weight:700; color:var(--ink)}
+.session-abha{font-family:var(--font-mono); font-size:.64rem; color:var(--ink-faint)}
+.icon-btn{
+  border:none; background:transparent; color:var(--ink-faint); cursor:pointer;
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+}
+.icon-btn:hover{background:var(--white); color:var(--risk-high)}
+.icon-btn svg{width:15px; height:15px}
+
+.page{max-width:1280px; margin:0 auto; padding:32px 28px 80px}
+.page-narrow{max-width:640px}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  font-weight:700; font-size:.92rem; font-family:var(--font-body);
+  padding:12px 22px; border-radius:11px; border:1px solid transparent;
+  cursor:pointer; transition:transform .12s ease, box-shadow .12s ease, background .15s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:linear-gradient(180deg, var(--blue-600), var(--blue-700)); color:#fff; box-shadow:var(--shadow-sm)}
+.btn-primary:hover{box-shadow:var(--shadow-md)}
+.btn-secondary{background:var(--white); color:var(--blue-700); border-color:var(--line-strong)}
+.btn-secondary:hover{background:var(--bg-panel)}
+.btn-ghost{background:transparent; color:var(--ink-soft)}
+.btn-ghost:hover{color:var(--blue-700)}
+.btn-sm{padding:8px 16px; font-size:.82rem; border-radius:9px}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.5; cursor:not-allowed; box-shadow:none}
+
+/* ---------- badges ---------- */
+.badge{
+  display:inline-flex; align-items:center; gap:5px;
+  font-size:.72rem; font-weight:700; padding:4px 10px; border-radius:999px;
+  letter-spacing:.01em;
+}
+.badge::before{content:""; width:6px; height:6px; border-radius:50%; background:currentColor}
+.badge.risk-high{background:var(--risk-high-bg); color:var(--risk-high)}
+.badge.risk-moderate{background:var(--risk-mod-bg); color:var(--risk-mod)}
+.badge.risk-low{background:var(--risk-low-bg); color:var(--risk-low)}
+
+/* ==========================================================================
+   STAGE 1 — Facility dashboard
+   ========================================================================== */
+.facility-header{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+  margin-bottom:28px; flex-wrap:wrap;
+}
+.facility-header h1{font-size:1.9rem}
+.facility-meta{display:flex; gap:18px; flex-wrap:wrap; margin-top:6px}
+.facility-meta span{font-size:.85rem; color:var(--ink-soft)}
+.facility-meta b{color:var(--ink)}
+
+.stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px}
+.stat-card{
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md);
+  padding:20px 20px 18px; position:relative; overflow:hidden;
+}
+.stat-card .stat-num{font-family:var(--font-display); font-size:2.1rem; font-weight:800; color:var(--ink); line-height:1}
+.stat-card .stat-label{font-size:.82rem; color:var(--ink-soft); margin-top:8px; font-weight:600}
+.stat-card.accent-high{border-top:3px solid var(--risk-high)}
+.stat-card.accent-mod{border-top:3px solid var(--risk-mod)}
+.stat-card.accent-low{border-top:3px solid var(--risk-low)}
+.stat-card.accent-blue{border-top:3px solid var(--blue-600)}
+
+.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:20px}
+.tab-btn{
+  padding:11px 4px; margin-right:22px; font-weight:700; font-size:.9rem; color:var(--ink-faint);
+  border-bottom:2px solid transparent; cursor:pointer; background:none; border-top:none; border-left:none; border-right:none;
+}
+.tab-btn.is-active{color:var(--blue-700); border-color:var(--blue-600)}
+.tab-panel{display:none}
+.tab-panel.is-active{display:block}
+
+.filter-row{display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap}
+.chip-filter{
+  font-size:.8rem; font-weight:600; padding:7px 14px; border-radius:999px;
+  border:1px solid var(--line-strong); background:var(--white); color:var(--ink-soft); cursor:pointer;
+}
+.chip-filter.is-active{background:var(--blue-700); border-color:var(--blue-700); color:#fff}
+
+.patient-table{width:100%; border-collapse:separate; border-spacing:0}
+.patient-table thead th{
+  text-align:left; font-size:.72rem; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--ink-faint); font-weight:700; padding:0 14px 10px; border-bottom:1px solid var(--line);
+}
+.patient-table tbody tr{background:var(--white); cursor:pointer}
+.patient-table tbody tr:hover{background:var(--bg-soft)}
+.patient-table td{padding:14px; border-bottom:1px solid var(--line); font-size:.88rem; vertical-align:middle}
+.patient-name-cell{display:flex; align-items:center; gap:10px}
+.patient-table .p-village{color:var(--ink-faint); font-size:.78rem}
+.patient-table .p-conditions{color:var(--ink-soft); font-size:.82rem}
+
+.followup-list{display:flex; flex-direction:column; gap:10px}
+.followup-row{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:14px 18px;
+}
+.followup-left{display:flex; align-items:center; gap:12px}
+.followup-date{
+  font-family:var(--font-mono); font-size:.78rem; font-weight:700; color:var(--blue-700);
+  background:var(--blue-100); padding:6px 10px; border-radius:8px; text-align:center; min-width:78px;
+}
+
+/* ==========================================================================
+   STAGE 2 — ABHA Login
+   ========================================================================== */
+.login-shell{
+  min-height:calc(100vh - 65px); display:flex; align-items:center; justify-content:center;
+  background:
+    radial-gradient(560px 320px at 15% 10%, var(--bg-panel), transparent),
+    radial-gradient(600px 360px at 90% 90%, var(--bg-panel), transparent),
+    var(--white);
+  padding:40px 20px;
+}
+.login-card{
+  width:100%; max-width:440px; background:var(--white); border:1px solid var(--line);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow-lg); padding:38px 34px 32px;
+}
+.login-icon{
+  width:52px; height:52px; border-radius:14px; background:linear-gradient(160deg, var(--blue-600), var(--blue-900));
+  display:flex; align-items:center; justify-content:center; margin-bottom:18px; box-shadow:var(--shadow-sm);
+}
+.login-icon svg{width:26px; height:26px}
+.login-card h1{font-size:1.4rem}
+.login-card .sub{font-size:.88rem; margin-bottom:22px}
+
+.field{margin-bottom:16px}
+.field label{display:block; font-size:.78rem; font-weight:700; color:var(--ink-soft); margin-bottom:7px}
+.field input, .field select{
+  width:100%; padding:12px 14px; border:1.5px solid var(--line-strong); border-radius:10px;
+  font-size:.98rem; font-family:var(--font-mono); background:var(--bg-soft); color:var(--ink);
+  transition:border-color .15s, background .15s;
+}
+.field input:focus, .field select:focus{border-color:var(--blue-500); background:var(--white); outline:none}
+.field .hint{font-size:.74rem; color:var(--ink-faint); margin-top:6px; font-family:var(--font-body)}
+.field-error input{border-color:var(--risk-high); background:var(--risk-high-bg)}
+.error-msg{color:var(--risk-high); font-size:.8rem; font-weight:600; margin-top:8px; display:none}
+.error-msg.is-visible{display:block}
+
+.demo-ids{
+  margin-top:22px; padding:14px 16px; background:var(--bg-soft); border:1px dashed var(--line-strong); border-radius:12px;
+}
+.demo-ids .eyebrow{margin-bottom:8px; display:block}
+.demo-id-btn{
+  display:flex; justify-content:space-between; width:100%; text-align:left;
+  background:none; border:none; padding:6px 0; font-family:var(--font-mono); font-size:.78rem; color:var(--blue-700);
+  cursor:pointer; border-bottom:1px solid var(--line);
+}
+.demo-id-btn:last-child{border-bottom:none}
+.demo-id-btn span.pname{font-family:var(--font-body); color:var(--ink-soft); font-weight:600}
+.demo-id-btn:hover{color:var(--blue-500)}
+
+.otp-row{display:flex; gap:9px; margin:6px 0 4px}
+.otp-row input{
+  width:44px; height:52px; text-align:center; font-size:1.2rem; padding:0;
+}
+
+/* ==========================================================================
+   STAGE — Patient record
+   ========================================================================== */
+.record-header{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
+  padding-bottom:22px; border-bottom:1px solid var(--line); margin-bottom:26px;
+}
+.record-id{display:flex; align-items:center; gap:16px}
+.record-avatar{
+  width:58px; height:58px; border-radius:16px; background:var(--blue-800); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-weight:800; font-size:1.15rem;
+}
+.record-id h1{font-size:1.5rem; margin-bottom:2px}
+.record-sub{display:flex; gap:14px; flex-wrap:wrap; font-size:.83rem; color:var(--ink-soft)}
+.record-sub b{color:var(--ink)}
+
+.grid-2col{display:grid; grid-template-columns:2fr 1.1fr; gap:22px}
+@media (max-width:900px){ .grid-2col{grid-template-columns:1fr} .stat-grid{grid-template-columns:repeat(2,1fr)} }
+
+.panel{background:var(--white); border:1px solid var(--line); border-radius:var(--radius-md); padding:22px}
+.panel + .panel{margin-top:18px}
+.panel h3{font-size:1rem; display:flex; align-items:center; justify-content:space-between}
+
+.vitals-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:14px}
+.vital-tile{background:var(--bg-soft); border-radius:10px; padding:12px 14px}
+.vital-tile .v-label{font-size:.72rem; color:var(--ink-faint); font-weight:600; text-transform:uppercase; letter-spacing:.04em}
+.vital-tile .v-value{font-family:var(--font-mono); font-size:1.15rem; font-weight:700; color:var(--ink); margin-top:4px}
+
+.timeline{margin-top:14px; display:flex; flex-direction:column; gap:0}
+.timeline-item{display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--line)}
+.timeline-item:first-child{border-top:none}
+.timeline-dot{width:9px; height:9px; border-radius:50%; background:var(--blue-500); margin-top:6px; flex-shrink:0}
+.timeline-date{font-family:var(--font-mono); font-size:.72rem; color:var(--blue-700); font-weight:700}
+.timeline-note{font-size:.86rem; color:var(--ink-soft); margin-top:2px}
+
+.med-list{list-style:none; margin:12px 0 0; padding:0; display:flex; flex-direction:column; gap:8px}
+.med-list li{
+  font-size:.85rem; color:var(--ink); background:var(--bg-soft); border-radius:8px; padding:9px 12px;
+  display:flex; align-items:center; gap:8px;
+}
+.med-list li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--blue-500); flex-shrink:0}
+
+.condition-tag-list{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+.condition-tag{
+  font-size:.78rem; font-weight:700; padding:6px 12px; border-radius:999px; background:var(--blue-100); color:var(--blue-700);
+}
+
+/* ==========================================================================
+   STAGE 3 — Health Risk Assessment (deliberately the most colourful screen)
+   ========================================================================== */
+.assess-hero{
+  border-radius:var(--radius-lg); padding:28px 30px;
+  background:linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 55%, #2d6fe0 100%);
+  color:#fff; margin-bottom:26px; position:relative; overflow:hidden;
+}
+.assess-hero::after{
+  content:""; position:absolute; right:-60px; top:-60px; width:220px; height:220px; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,255,255,.16), transparent 70%);
+}
+.assess-hero h1{color:#fff; font-size:1.6rem}
+.assess-hero p{color:rgba(255,255,255,.82); max-width:520px; margin-bottom:0}
+
+.search-box{
+  display:flex; align-items:center; gap:10px; background:#fff; border-radius:14px; padding:13px 16px;
+  box-shadow:var(--shadow-md); margin-top:20px; max-width:560px;
+}
+.search-box svg{width:18px; height:18px; color:var(--ink-faint); flex-shrink:0}
+.search-box input{border:none; outline:none; font-size:.96rem; flex:1; background:transparent; color:var(--ink); font-family:var(--font-body)}
+
+.category-filters{display:flex; gap:8px; flex-wrap:wrap; margin:22px 0 20px}
+.condition-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(270px,1fr)); gap:16px}
+.condition-card{
+  border-radius:var(--radius-md); padding:20px; cursor:pointer; border:1.5px solid transparent;
+  position:relative; overflow:hidden; transition:transform .14s ease, box-shadow .14s ease;
+  background: var(--card-soft, var(--bg-panel));
+}
+.condition-card:hover{transform:translateY(-3px); box-shadow:var(--shadow-md)}
+.condition-card.is-selected{border-color:var(--card-color, var(--blue-600)); box-shadow:var(--shadow-md)}
+.condition-icon{
+  width:42px; height:42px; border-radius:11px; background:var(--card-color, var(--blue-600)); color:#fff;
+  display:flex; align-items:center; justify-content:center; margin-bottom:14px;
+}
+.condition-icon svg{width:22px; height:22px}
+.condition-card h4{font-size:1rem; margin-bottom:5px}
+.condition-cat{
+  font-size:.68rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--card-color, var(--blue-700)); margin-bottom:8px; display:block;
+}
+.condition-card p{font-size:.82rem; margin-bottom:0; color:var(--ink-soft)}
+.condition-card .flagged-pill{
+  position:absolute; top:16px; right:16px; background:#fff; color:var(--card-color,var(--blue-700));
+  font-size:.66rem; font-weight:800; padding:3px 9px; border-radius:999px; border:1px solid currentColor;
+}
+
+.sticky-assess-bar{
+  position:sticky; bottom:18px; margin-top:28px; background:var(--ink); color:#fff; border-radius:16px;
+  padding:16px 22px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-lg);
+}
+.sticky-assess-bar span{font-size:.88rem; color:rgba(255,255,255,.75)}
+.sticky-assess-bar b{color:#fff}
+
+/* ==========================================================================
+   STAGE 4/5 — Assess + score result
+   ========================================================================== */
+.assess-layout{display:grid; grid-template-columns:1fr 1fr; gap:26px; align-items:start}
+@media (max-width:960px){ .assess-layout{grid-template-columns:1fr} }
+
+.form-section{margin-bottom:22px}
+.form-section h4{font-size:.82rem; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-bottom:12px}
+.history-readout{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.readout-tile{background:var(--bg-soft); border-radius:9px; padding:10px 12px}
+.readout-tile .rl{font-size:.7rem; color:var(--ink-faint); font-weight:600}
+.readout-tile .rv{font-family:var(--font-mono); font-weight:700; font-size:.94rem; margin-top:2px}
+
+.context-field{margin-bottom:18px}
+.context-field label{display:block; font-size:.85rem; font-weight:700; color:var(--ink); margin-bottom:9px}
+.slider-row{display:flex; align-items:center; gap:12px}
+.slider-row input[type=range]{flex:1; accent-color:var(--blue-600)}
+.slider-val{font-family:var(--font-mono); font-weight:700; font-size:.86rem; color:var(--blue-700); width:26px; text-align:right}
+.slider-scale{display:flex; justify-content:space-between; font-size:.68rem; color:var(--ink-faint); margin-top:4px}
+.select-pill-group{display:flex; flex-wrap:wrap; gap:8px}
+.select-pill{
+  padding:9px 15px; border-radius:10px; border:1.5px solid var(--line-strong); background:var(--white);
+  font-size:.83rem; font-weight:600; color:var(--ink-soft); cursor:pointer;
+}
+.select-pill.is-selected{background:var(--blue-700); border-color:var(--blue-700); color:#fff}
+
+/* score dial (signature element) */
+.result-card{
+  background:linear-gradient(180deg, var(--white), var(--bg-soft));
+  border:1px solid var(--line); border-radius:var(--radius-lg); padding:26px; text-align:center;
+  position:sticky; top:90px;
+}
+.dial-wrap{position:relative; width:230px; margin:6px auto 4px}
+.dial-score{
+  position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
+.dial-score .num{font-family:var(--font-display); font-size:3rem; font-weight:800; color:var(--ink); line-height:1}
+.dial-score .out-of{font-size:.78rem; color:var(--ink-faint); font-weight:600}
+.result-band-badge{margin-top:10px}
+.threshold-note{font-size:.82rem; color:var(--ink-soft); margin-top:14px; padding:10px 14px; background:var(--bg-panel); border-radius:10px}
+.threshold-note b{color:var(--ink)}
+
+.explain-list{list-style:none; margin:14px 0 0; padding:0; text-align:left; display:flex; flex-direction:column; gap:10px}
+.explain-item{display:flex; justify-content:space-between; gap:10px; font-size:.83rem; padding:10px 12px; background:var(--white); border:1px solid var(--line); border-radius:9px}
+.explain-item .ei-label{color:var(--ink-soft); font-weight:600}
+.explain-item .ei-pts{font-family:var(--font-mono); font-weight:700}
+.ei-pts.up{color:var(--risk-high)}
+.ei-pts.down{color:var(--risk-low)}
+.ei-pts.flat{color:var(--ink-faint)}
+
+.narrative-box{
+  text-align:left; font-size:.9rem; color:var(--ink-soft); background:var(--bg-soft);
+  border-left:3px solid var(--blue-600); border-radius:0 10px 10px 0; padding:14px 16px; margin-top:16px;
+}
+.narrative-box b{color:var(--ink)}
+
+.followup-card{
+  margin-top:16px; text-align:left; border-radius:12px; padding:16px 18px;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.followup-card.band-high{background:var(--risk-high-bg); border:1px solid #f5c6bf}
+.followup-card.band-moderate{background:var(--risk-mod-bg); border:1px solid #f6dfa8}
+.followup-card.band-low{background:var(--risk-low-bg); border:1px solid #b9e6cd}
+.followup-card h5{margin:0 0 4px; font-size:.92rem; font-family:var(--font-display)}
+.followup-card p{margin:0; font-size:.82rem}
+
+.empty-result{
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  padding:60px 20px; color:var(--ink-faint); text-align:center;
+}
+.empty-result svg{width:48px; height:48px; opacity:.5}
+
+.section-title-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:6px}
+.section-title-row h2{font-size:1.3rem; margin-bottom:0}
+
+.footer-note{margin-top:60px; padding-top:20px; border-top:1px solid var(--line); font-size:.76rem; color:var(--ink-faint); text-align:center}
+
+@media (max-width:720px){
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .topbar-inner{padding:10px 16px}
+  .stage-nav{display:none}
+  .page{padding:22px 16px 60px}
+  .grid-2col{grid-template-columns:1fr}
+  .facility-header{flex-direction:column; align-items:flex-start}
+}

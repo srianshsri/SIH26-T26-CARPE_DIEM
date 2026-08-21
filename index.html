@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareGrid · Facility Dashboard</title>
+<meta name="description" content="Facility-level dashboard for monitored patients, risk categories and upcoming follow-ups.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="dashboard">
+<div id="app-nav"></div>
+
+<main class="page">
+  <div class="facility-header">
+    <div>
+      <span class="eyebrow" id="facility-type">PHC</span>
+      <h1 id="facility-name">—</h1>
+      <div class="facility-meta">
+        <span>In-charge: <b id="facility-incharge">—</b></span>
+        <span>District: <b id="facility-district">—</b></span>
+        <span>Facility code: <b class="mono" id="facility-code">—</b></span>
+      </div>
+    </div>
+    <a class="btn btn-primary" href="login.html">+ New patient check-in</a>
+  </div>
+
+  <div class="stat-grid" id="stat-grid"></div>
+
+  <div class="tabs">
+    <button class="tab-btn is-active" data-tab="patients">Patients monitored</button>
+    <button class="tab-btn" data-tab="followups">Follow-ups</button>
+  </div>
+
+  <section class="tab-panel is-active" id="tab-patients">
+    <div class="filter-row" id="filter-row"></div>
+    <table class="patient-table">
+      <thead>
+        <tr><th>Patient</th><th>Age / Gender</th><th>Conditions</th><th>Risk</th><th>Last visit</th><th>Next follow-up</th></tr>
+      </thead>
+      <tbody id="patient-rows"></tbody>
+    </table>
+  </section>
+
+  <section class="tab-panel" id="tab-followups">
+    <div class="followup-list" id="followup-list"></div>
+  </section>
+
+  <p class="footer-note">CareGrid is a demonstration interface built for prototyping purposes. No real patient data is stored or transmitted.</p>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

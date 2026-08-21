@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareGrid · Health Risk Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="assessment">
+<div id="app-nav"></div>
+
+<main class="page">
+  <div class="assess-hero">
+    <span class="eyebrow" style="color:#cfe0ff">Stage 3 · Health Risk Assessment</span>
+    <h1 id="hero-title">Search a condition to assess</h1>
+    <p id="hero-sub">Loading patient…</p>
+    <div class="search-box">
+      <span id="search-icon"></span>
+      <input id="condition-search" type="text" placeholder="Search a condition — e.g. diabetes, hypertension, kidney…">
+    </div>
+  </div>
+
+  <div class="category-filters" id="category-filters"></div>
+  <div class="condition-grid" id="condition-grid"></div>
+
+  <div class="sticky-assess-bar" id="assess-bar" style="display:none">
+    <span>Selected condition: <b id="selected-name">—</b></span>
+    <a class="btn btn-primary" id="assess-go" href="#">Assess this condition →</a>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/assessment.js"></script>
+</body>
+</html>
